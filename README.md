@@ -57,3 +57,25 @@ fastapi dev app/main.py
 ```
 The application will be live at http://127.0.0.1:8000
 
+## Technical Challenges & Fixes
+
+### 1. The "Localhost" Redirection Bug
+* **Issue:** Initially, the API generated short links using `127.0.0.1:8000`, which worked locally but failed in production.
+* **Fix:** Implemented dynamic base URL detection using the FastAPI `Request` object to ensure the app is "environment-aware."
+
+### 2. Deployment Host Binding
+* **Issue:** The application was unreachable on Railway due to default host binding.
+* **Fix:** Configured the `Procfile` to bind to `0.0.0.0` and dynamically use the `${PORT}` assigned by the platform.
+
+### 3. Variable Shadowing
+* **Issue:** Experienced an `AttributeError` during the transition to dynamic URLs.
+* **Fix:** Resolved a naming conflict where the `Request` object was being shadowed by a local variable, ensuring clean scope management.
+
+
+## Deployment & Validity
+**Live Demo:** [https://url-shortener-1904.up.railway.app/]
+* **Link Validity:** Since this project uses an ephemeral SQLite database on Railway's trial tier, links are valid as long as the current deployment is active. 
+* **Note:** Database records may reset during redeployments. For a permanent solution, a persistent PostgreSQL instance is recommended.
+
+
+
