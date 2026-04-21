@@ -1,4 +1,4 @@
-# The Link Edit | Premium URL Shortener
+# The Link Edit | URL Shortener
 
 A high-end, aesthetic URL shortening service designed with a **"Premium E-commerce"** aesthetic. Built using **FastAPI** and **SQLAlchemy**, featuring a **Glassmorphism** dashboard inspired by luxury platforms like Myntra and Nykaa.
 

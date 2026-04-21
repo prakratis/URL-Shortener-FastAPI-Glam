@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# The database file that will be created
+
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
 
 engine = create_engine(
@@ -10,7 +10,7 @@ engine = create_engine(
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# THIS IS THE LINE THE COMPUTER IS LOOKING FOR:
+
 Base = declarative_base()
 
 def get_db():
