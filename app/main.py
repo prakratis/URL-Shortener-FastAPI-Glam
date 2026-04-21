@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import RedirectResponse
+from httpx import request
 from sqlalchemy.orm import Session
 from . import models, database, utils
 from fastapi.templating import Jinja2Templates
@@ -29,7 +30,10 @@ def shorten(url: str, db: Session = Depends(database.get_db)):
     db_url.short_code = code
     db.commit()
     
-    return {"short_url": f"http://127.0.0.1:8000/{db_url.short_code}"}
+    # Detect the base URL dynamically
+    base_url = str(request.base_url)
+    
+    return {"short_url": f"{base_url}{db_url.short_code}"}
 
 @app.get("/{short_code}")
 def redirect_to_url(short_code: str, db: Session = Depends(database.get_db)):
